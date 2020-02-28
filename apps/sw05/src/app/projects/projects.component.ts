@@ -44,7 +44,7 @@ export class ProjectsComponent implements OnInit {
     })
   }
 
-  private delete(project: Project) {
+  delete(project: Project) {
     this.projectsService.delete(project)
       .subscribe(() => {
         this.reset();
