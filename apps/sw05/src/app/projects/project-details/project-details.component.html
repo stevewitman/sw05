@@ -1,26 +1,29 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Edit</mat-card-title>
+    <mat-card-title *ngIf="selectedProject.id; else create">Edit: {{selectedProject.title}}</mat-card-title>
+    <ng-template #create>
+      <mat-card-title>Create a New Project</mat-card-title>
+    </ng-template>
   </mat-card-header>
 
-  <form>
+  <form [formGroup]="group" (submit)="saved.emit(group.value)">
     <mat-card-content class="mb-0">
       <mat-form-field class="w-100">
         <mat-label>Title</mat-label>
-        <input type="text" mat-input placeholder="Title" name="title">
+        <input type="text" matInput placeholder="Title" formControlName="title">
       </mat-form-field>
       <mat-form-field class="w-100">
         <mat-label>Details</mat-label>
-        <input type="text" mat-input placeholder="Details" name="details">
+        <input type="text" matInput placeholder="Details" formControlName="details">
       </mat-form-field>
 
       <span>Importance Level</span>
-      <mat-slider [thumbLabel]="true" class="w-100" name="ImportanceLevel"></mat-slider>
+      <mat-slider [thumbLabel]="true" class="w-100" formControlName="importanceLevel"></mat-slider>
     </mat-card-content>
 
     <mat-card-actions class="d-flex flex-row-reverse mb-0">
       <button mat-button color="primary" type="submit">Submit</button>
-      <button mat-button color="warn" type="reset">Cancel</button>
+      <button mat-button color="warn" type="reset" (click)="cancelled.emit()">Cancel</button>
     </mat-card-actions>
   </form>
 
