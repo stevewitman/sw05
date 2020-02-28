@@ -22,15 +22,15 @@ export class ProjectsService {
   }
 
   create(project: Project): Observable<Project> {
-    return this.http.get<Project>(this.getUrl(), project)
+    return this.http.post<Project>(this.getUrl(), project)
   }
 
   update(project: Project): Observable<Project> {
-    return this.http.get<Project>(this.getUrlWithId(project.id), project)
+    return this.http.patch<Project>(this.getUrlWithId(project.id), project)
   }
 
   delete(project: Project): Observable<Project> {
-    return this.http.get<Project>(this.getUrlWithId(project.id))
+    return this.http.delete<Project>(this.getUrlWithId(project.id))
   }
 
   private getUrl() {
